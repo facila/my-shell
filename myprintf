@@ -1,0 +1,10 @@
+#!/bin/bash
+
+X=$1
+V=$2
+
+C=`printf $V | wc -c`
+M=`printf $V | wc -m`
+X=`expr $X + $C - $M`'s'
+
+printf "%-$X" "$V"
