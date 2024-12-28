@@ -5,3 +5,4 @@ myprintf : fonction permettant de gerer le format utf8 , donc les caractères sp
 syntaxe  : myprintf longueur variable
 exemple  : myprintf 30 "caractères spéciaux"
 résultat : "caractères spéciaux          "
+'''
