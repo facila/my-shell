@@ -3,8 +3,7 @@
 # myprintf version 1.00 Janvier 2025 par Thierry Le Gall
 
 # commande shell pour faire un printf avec des caractères spéciaux
-# syntaxe identique à printf
-# myprintf FORMAT [ARGUMENT]...
+# syntaxe identique à printf : myprintf FORMAT [ARGUMENT]...
 
 FORMAT=$1
 IFS='%'
