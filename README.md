@@ -7,7 +7,7 @@
 ```
 ### 2 : scripts shell pour de nouvelles commandes
 ```
-2.1 : myfile   : modifier le propriétaire , le groupe et les droits d'un fichier
+2.1 : myfile   : modifier les droits , le propriétaire et le groupe d'un fichier
 2.2 : myopen   : éditer un fichier dans un terminal
 2.3 : myverif  : vérifier la syntaxe d'un script
 ```
