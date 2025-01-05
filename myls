@@ -1,0 +1,63 @@
+#!/bin/bash
+ 
+# myls version 1.00 Janvier 2025 par Thierry Le Gall
+# myls -h : afficher l'aide
+
+detail()
+{
+for I in $1/*
+do [ -f "$I" ] && echo "f $I"
+   [ -d "$I" ] && { echo "d $I" ; detail "$I" ; }
+done
+}
+
+a() # all
+{
+for I in $1/*
+do [ -f "$I" ] && echo "$I"
+   [ -d "$I" ] && { echo "$I" ; a "$I" ; }
+done
+}
+
+d() # dossier
+{
+for I in $1/*
+do [ -d "$I" ] && { echo "$I" ; d "$I" ; }
+done
+}
+ 
+f() # file
+{
+for I in $1/*
+do [ -f "$I" ] && echo "$I"
+   [ -d "$I" ] && f "$I"
+done
+}
+
+h() # help
+{
+printf "
+myls : afficher les dossiers ou les fichiers d'un dossier
+
+syntaxe             : myls [OPTION] [DOSSIER]
+
+si pas d'OPTION     : detail : affichage des dossiers et des fichiers
+                               avec un premier champ d ou f qui précise le type ligne affichée
+
+si OPTION           : une seule doit etre présente
+          -a : all  : affichage des dossiers et des fichiers
+          -d : dir  : affichage des dossiers
+          -f : file : affichage des fichiers
+          -h : help : affichage de l'aide
+
+si pas de DOSSIER : affichage du dossier courant
+
+"
+}
+
+getopts adfh FCT
+
+[ "$FCT" = "?" ] && FCT=detail || shift
+[ "$1"   = ""  ] && DIR=`pwd`  || DIR=$1
+
+$FCT "$DIR"
