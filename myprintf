@@ -1,10 +1,33 @@
 #!/bin/bash
 
-X=$1
-V=$2
+# myprintf version 1.00 Janvier 2025 par Thierry Le Gall
 
-C=`printf $V | wc -c`
-M=`printf $V | wc -m`
-X=`expr $X + $C - $M`'s'
+# commande shell pour faire un printf avec des caractères spéciaux
+# syntaxe identique à printf
+# myprintf FORMAT [ARGUMENT]...
 
-printf "%-$X" "$V"
+FORMAT=$1
+IFS='%'
+read -ra TAB_F <<< "$FORMAT"
+unset TAB_F[0]
+shift
+
+I=0
+for A1 in "$@" # tableau des arguments initiaux
+do I=$((I+1))
+   F=${TAB_F[$I]}
+   F=$(echo $F | tr -d -)
+   F=$(echo $F | cut -f1 -ds) # F taille dans la commande initiale pour un %s
+   A2=$A1
+   if [[ $F =~ ^[0-9]+$ ]]            # uniquement pour %s
+   then C=`printf "$A1" | wc -c`      # C taille en octets 
+        M=`printf "$A1" | wc -m`      # M taille en chars
+        if [ $C != $M ]               # si caractères spéciaux
+        then X=`expr $F + $C - $M`'s' # X taille pour printf 
+             A2=`printf "%-$X" "$A1"` # A2 mise en forme au nouveau format
+        fi
+   fi
+   ARG+=("$A2") # nouveau tableau des arguments
+done
+
+printf "$FORMAT" "${ARG[@]}"
