@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# mygrep version 1.00 Janvier 2025 par Thierry Le Gall
+
+OPTIONS=$1
+PATTERN=$2
+FILTER=$3
+LIST=$4
+
+[ "$LIST" = '' ] && exit
+
+OPTIONS="-aR --exclude=*.swp $OPTIONS"
+
+if   [ "$PATTERN" != '' -a "$FILTER"  = '' ] ; then grep    $OPTIONS "$PATTERN" $LIST
+elif [ "$PATTERN"  = '' -a "$FILTER" != '' ] ; then grep -v $OPTIONS "$FILTER"  $LIST
+elif [ "$PATTERN" != '' -a "$FILTER" != '' ] ; then grep    $OPTIONS "$PATTERN" $LIST | grep -av "$FILTER"
+fi
