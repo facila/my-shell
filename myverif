@@ -5,6 +5,19 @@
 # syntaxe : myverif FILE
 
 FILE=$1
-case `echo "$FILE" | awk -F. '{print $NF}'` in
-pl|pm|tk) perl -c $FILE ;;
+TYPE=`head -n1 $FILE`
+
+if   [[ $TYPE =~ bash ]] ; then TYPE=bash
+elif [[ $TYPE =~ sh   ]] ; then TYPE=bash
+elif [[ $TYPE =~ perl ]] ; then TYPE=perl
+# test de l'extention du fichier .X
+else case `echo "$FILE" | awk -F. '{print $NF}'` in
+           sh) TYPE=bash ;;
+     pl|pm|tk) TYPE=perl ;;
+     esac
+fi
+
+case $TYPE in
+bash) shellcheck $FILE ;;
+perl) perl -c    $FILE ;;
 esac
