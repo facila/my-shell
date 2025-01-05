@@ -9,5 +9,5 @@
 ```
 2.1 : myfile   : modifier les droits , le propriétaire et le groupe d'un fichier
 2.2 : myopen   : éditer un fichier dans un terminal
-2.3 : myverif  : vérifier la syntaxe d'un script
+2.3 : myverif  : vérifier la syntaxe d'un programme
 ```
