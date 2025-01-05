@@ -3,7 +3,7 @@
 ```
 1.1 : mygrep   : rechercher dans une liste de répertoires et de fichiers
 1.2 : myls     : afficher les dossiers ou les fichiers d'un dossier
-1.3 : myprintf : éxecuter un printf avec des caractères spéciaux
+1.3 : myprintf : exécuter un printf avec des caractères spéciaux
 ```
 ### 2 : scripts shell pour de nouvelles commandes
 ```
