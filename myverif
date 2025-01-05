@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# myverif version 1.00 Janvier 2025 par Thierry Le Gall
+# fonction qui peut être complétée avec d'autres types de langage
+# syntaxe : myverif FILE
+
+FILE=$1
+case `echo "$FILE" | awk -F. '{print $NF}'` in
+pl|pm|tk) perl -c $FILE ;;
+esac
