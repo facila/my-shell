@@ -13,7 +13,7 @@ case ${FILE##*.} in # test de l'extention du fichier .X
       sh) fct_sh ;;
 pl|pm|tk) fct_perl ;;
        *) case $(grep '#!' "$FILE" | head -n1) in # test de la ligne #!
-            *sh*) printf fct_sh ;;
-          *perl*) printf fct_perl ;;
+            *sh*) fct_sh ;;
+          *perl*) fct_perl ;;
           esac ;;
 esac
