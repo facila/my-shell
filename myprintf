@@ -1,29 +1,28 @@
 #!/bin/bash
 
 # myprintf version 1.00 Janvier 2025 par Thierry Le Gall
-
 # exécuter un printf avec des caractères spéciaux
 # syntaxe identique à printf : myprintf FORMAT [ARGUMENT]...
 
 FORMAT=$1
 IFS='%'
 read -ra TAB_F <<< "$FORMAT"
-unset TAB_F[0]
+unset "TAB_F[0]"
 shift
 
 I=0
 for A1 in "$@" # tableau des arguments initiaux
 do I=$((I+1))
    F=${TAB_F[$I]}
-   F=$(echo $F | tr -d -)
-   F=$(echo $F | cut -f1 -ds) # F taille dans la commande initiale pour un %s
+   F=$(echo "$F" | tr -d -)
+   F=$(echo "$F" | cut -f1 -ds) # F taille dans la commande initiale pour un %s
    A2=$A1
-   if [[ $F =~ ^[0-9]+$ ]]            # uniquement pour %s
-   then C=`printf "$A1" | wc -c`      # C taille en octets 
-        M=`printf "$A1" | wc -m`      # M taille en chars
-        if [ $C != $M ]               # si caractères spéciaux
-        then X=`expr $F + $C - $M`'s' # X taille pour printf 
-             A2=`printf "%-$X" "$A1"` # A2 mise en forme au nouveau format
+   if [[ $F =~ ^[0-9]+$ ]]                # uniquement pour %s
+   then C=$(printf "$A1" | wc -c)         # C taille en octets 
+        M=$(printf "$A1" | wc -m)         # M taille en chars
+        if [ "$C" != "$M" ]               # si caractères spéciaux
+        then  X=$(("$F" + "$C" - "$M"))   # X taille pour printf 
+             A2=$(printf "%-${X}s" "$A1") # A2 mise en forme au nouveau format
         fi
    fi
    ARG+=("$A2") # nouveau tableau des arguments
