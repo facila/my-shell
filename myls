@@ -1,6 +1,5 @@
 #!/bin/bash
- 
-# myls version 1.00 Janvier 2025 par Thierry Le Gall
+
 # myls -h : afficher l'aide
 
 detail()
@@ -37,7 +36,9 @@ done
 h() # help
 {
 printf "
-myls : afficher les dossiers ou les fichiers d'un dossier
+myls version 1.00 Janvier 2025 par Thierry Le Gall
+
+afficher les dossiers ou les fichiers d'un dossier
 
 syntaxe             : myls [OPTION] [DOSSIER]
 
@@ -50,7 +51,7 @@ si OPTION           : une seule doit être présente
           -f : file : affichage des fichiers
           -h : help : affichage de l'aide
 
-si pas de DOSSIER : affichage du dossier courant
+si pas de DOSSIER   : affichage du dossier courant
 
 "
 }
