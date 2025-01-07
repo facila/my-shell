@@ -2,22 +2,22 @@
 
 # myverif version 1.00 Janvier 2025 par Thierry Le Gall
 # fonction qui peut être complétée avec d'autres types de langage
-# syntaxe : myverif FILE
+# syntaxe : myverif "FILE"
 
 FILE=$1
-TYPE=`head -n1 $FILE`
+TYPE=$(head -n1 "$FILE")
 
 if   [[ $TYPE =~ bash ]] ; then TYPE=bash
 elif [[ $TYPE =~ sh   ]] ; then TYPE=bash
 elif [[ $TYPE =~ perl ]] ; then TYPE=perl
 # test de l'extention du fichier .X
-else case `echo "$FILE" | awk -F. '{print $NF}'` in
+else case $(echo "$FILE" | awk -F. '{print $NF}') in
            sh) TYPE=bash ;;
      pl|pm|tk) TYPE=perl ;;
      esac
 fi
 
 case $TYPE in
-bash) shellcheck $FILE ;;
-perl) perl -c    $FILE ;;
+bash) shellcheck "$FILE" -W0 -e SC2059,SC2086 && echo "$FILE syntax OK" ;;
+perl) perl -c    "$FILE" ;;
 esac
