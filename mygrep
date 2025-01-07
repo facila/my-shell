@@ -9,9 +9,9 @@ LIST=$4
 
 [ "$LIST" = '' ] && exit
 
-OPTIONS="-aR --exclude=*.swp $OPTIONS"
+OPTIONS="$OPTIONS -aR --exclude=*.swp"
 
-if   [ "$PATTERN" != '' -a "$FILTER"  = '' ] ; then grep    $OPTIONS "$PATTERN" $LIST
-elif [ "$PATTERN"  = '' -a "$FILTER" != '' ] ; then grep -v $OPTIONS "$FILTER"  $LIST
-elif [ "$PATTERN" != '' -a "$FILTER" != '' ] ; then grep    $OPTIONS "$PATTERN" $LIST | grep -av "$FILTER"
+if   [ "$PATTERN" != '' ] && [ "$FILTER"  = '' ] ; then grep    $OPTIONS "$PATTERN" $LIST
+elif [ "$PATTERN"  = '' ] && [ "$FILTER" != '' ] ; then grep -v $OPTIONS "$FILTER"  $LIST
+elif [ "$PATTERN" != '' ] && [ "$FILTER" != '' ] ; then grep    $OPTIONS "$PATTERN" $LIST | grep -av "$FILTER"
 fi
