@@ -1,13 +1,12 @@
 #!/bin/bash
 
 # myopen version 1.00 Janvier 2025 par Thierry Le Gall
-
 # myopen FILE TERM [EDIT]
 # fonction qui peut être complétée avec d'autres types de terminaux et d'éditeurs
 
 proc_term ()
 {
-cd "$FILE"
+cd "$FILE" || exit
 COMMAND="echo; ls --color=auto -alF; echo; bash"
 proc_command
 }
@@ -15,7 +14,7 @@ proc_command
 proc_edit ()
 {
 if [ "$EDIT" = "gvim" ]
-then $EDIT $FILE
+then "$EDIT" "$FILE"
 else COMMAND="$EDIT \"$FILE\""
      proc_command
 fi
@@ -23,20 +22,23 @@ fi
 
 proc_command ()
 {
-if   [ "$TERM" = "gnome-terminal" ] ; then gnome-terminal --geometry=$GEO --title "$FILE" -- bash -c "$COMMAND"
-elif [ "$TERM" = "terminator"     ] ; then terminator          --title "$FILE" -e "$COMMAND"
-elif [ "$TERM" = "xterm"          ] ; then xterm -geometry $GEO -title $FILE -bg $BG -fg $FG -fn $FONT -e "$COMMAND"
-else $TERM -e "$COMMAND"
+if   [ "$TERM" = "gnome-terminal" ] ; then gnome-terminal --geometry="$GEO" --title "$FILE" -- bash -c "$COMMAND"
+elif [ "$TERM" = "terminator"     ] ; then terminator            --title "$FILE" -e "$COMMAND"
+elif [ "$TERM" = "xterm"          ] ; then xterm -geometry "$GEO" -title "$FILE" -bg "$BG" -fg "$FG" -fn "$FONT" -e "$COMMAND"
+else "$TERM" -e "$COMMAND"
 fi
 }
 
  GEO=132x32+100+100
   BG=black
   FG=white
-FONT=-*-fixed-*-*-*-*-12-*-*-*-*-*-*-*
+FONT="-*-fixed-*-*-*-*-12-*-*-*-*-*-*-*"
 
 FILE=$1
 TERM=$2
 EDIT=$3
 
-[ "$EDIT" = "" ] && proc_term || proc_edit
+if [ "$EDIT" != "" ]
+then proc_edit
+else proc_term
+fi
