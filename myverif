@@ -4,18 +4,16 @@
 # fonction qui peut être complétée avec d'autres types de langage
 # syntaxe : myverif "FILE"
 
+fct_sh   () { shellcheck "$FILE" -W0 -e SC2059,SC2086 && echo "$FILE syntax OK" ; }
+fct_perl () { perl -c    "$FILE" ; }
+
 FILE=$1
 
-case $(head -n1 "$FILE") in # test de la première ligne du fichier
-  sh) TYPE=sh ;;
-perl) TYPE=sh ;;
-   *) case $(echo "$FILE" | awk -F. '{print $NF}') in # test de l'extention du fichier .X
-            sh) TYPE=sh ;;
-      pl|pm|tk) TYPE=perl ;;
-      esac
-esac
-
-case $TYPE in
-  sh) shellcheck "$FILE" -W0 -e SC2059,SC2086 && echo "$FILE syntax OK" ;;
-perl) perl -c    "$FILE" ;;
+case ${FILE##*.} in # test de l'extention du fichier .X
+      sh) fct_sh ;;
+pl|pm|tk) fct_perl ;;
+       *) case $(grep '#!' "$FILE" | head -n1) in # test de la ligne #!
+            *sh*) printf fct_sh ;;
+          *perl*) printf fct_perl ;;
+          esac ;;
 esac
