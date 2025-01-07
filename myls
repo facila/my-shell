@@ -5,7 +5,7 @@
 
 detail()
 {
-for I in $1/*
+for I in "$1"/*
 do [ -f "$I" ] && echo "f $I"
    [ -d "$I" ] && { echo "d $I" ; detail "$I" ; }
 done
@@ -13,7 +13,7 @@ done
 
 a() # all
 {
-for I in $1/*
+for I in "$1"/*
 do [ -f "$I" ] && echo "$I"
    [ -d "$I" ] && { echo "$I" ; a "$I" ; }
 done
@@ -21,14 +21,14 @@ done
 
 d() # dossier
 {
-for I in $1/*
+for I in "$1"/*
 do [ -d "$I" ] && { echo "$I" ; d "$I" ; }
 done
 }
  
 f() # file
 {
-for I in $1/*
+for I in "$1"/*
 do [ -f "$I" ] && echo "$I"
    [ -d "$I" ] && f "$I"
 done
@@ -44,7 +44,7 @@ syntaxe             : myls [OPTION] [DOSSIER]
 si pas d'OPTION     : detail : affichage des dossiers et des fichiers
                                avec un premier champ d ou f qui précise le type ligne affichée
 
-si OPTION           : une seule doit etre présente
+si OPTION           : une seule doit être présente
           -a : all  : affichage des dossiers et des fichiers
           -d : dir  : affichage des dossiers
           -f : file : affichage des fichiers
@@ -57,7 +57,14 @@ si pas de DOSSIER : affichage du dossier courant
 
 getopts adfh FCT
 
-[ "$FCT" = "?" ] && FCT=detail || shift
-[ "$1"   = ""  ] && DIR=`pwd`  || DIR=$1
+if [ "$FCT" = "?" ] # si pas d'option
+then FCT=detail
+else shift
+fi
+
+if [ "$1" = "" ]
+then DIR=$(pwd)
+else DIR=$1
+fi
 
 $FCT "$DIR"
