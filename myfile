@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # myfile version 1.00 Janvier 2025 par Thierry Le Gall
-# myfile FILE MOD OWN
+# myfile "FILE" "MOD" "OWN"
 
 FILE=$1
 MOD=$2
 OWN=$3
 
-touch $FILE
-chmod $MOD $FILE
-chown $OWN $FILE
+touch "$FILE"
+chmod "$MOD" "$FILE"
+chown "$OWN" "$FILE"
