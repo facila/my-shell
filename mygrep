@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # mygrep version 1.00 Janvier 2025 par Thierry Le Gall
-# mygrep OPTIONS PATTERN FILTER LIST
+# syntaxe : mygrep "OPTIONS" "PATTERN" "FILTER" "LIST"
 
 OPTIONS=$1
 PATTERN=$2
