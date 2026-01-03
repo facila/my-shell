@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # myverif version 1.00 Janvier 2025 par Thierry Le Gall
+# vérifier la syntaxe d'un programme
 # fonction qui peut être complétée avec d'autres types de langage
 # syntaxe : myverif "FILE"
 

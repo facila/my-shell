@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # myfile version 1.00 Janvier 2025 par Thierry Le Gall
+# modifier les droits , le propriétaire et le groupe d'un fichier
 # syntaxe : myfile "FILE" "MOD" "OWN"
 
 FILE=$1

@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # mygrep version 1.00 Janvier 2025 par Thierry Le Gall
+# rechercher dans une liste de répertoires et de fichiers
 # syntaxe : mygrep "OPTIONS" "PATTERN" "FILTER" "LIST"
 
 OPTIONS=$1

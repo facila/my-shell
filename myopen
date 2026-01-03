@@ -1,8 +1,9 @@
 #!/bin/bash
 
 # myopen version 1.00 Janvier 2025 par Thierry Le Gall
-# syntaxe : myopen FILE TERM [EDIT]
+# éditer un fichier dans un terminal
 # fonction qui peut être complétée avec d'autres types de terminaux et d'éditeurs
+# syntaxe : myopen FILE TERM [EDIT]
 
 proc_term ()
 {
