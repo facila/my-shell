@@ -10,9 +10,9 @@ LIST=$4
 
 [ "$LIST" = '' ] && exit
 
-OPTIONS="$OPTIONS -aR --exclude=*.swp"
+GREP="grep -aR --exclude=*.swp $OPTIONS"
 
-if   [ "$PATTERN" != '' ] && [ "$FILTER"  = '' ] ; then grep    $OPTIONS "$PATTERN" $LIST
-elif [ "$PATTERN"  = '' ] && [ "$FILTER" != '' ] ; then grep -v $OPTIONS "$FILTER"  $LIST
-elif [ "$PATTERN" != '' ] && [ "$FILTER" != '' ] ; then grep    $OPTIONS "$PATTERN" $LIST | grep -av "$FILTER"
+if   [ "$PATTERN" != '' ] && [ "$FILTER"  = '' ] ; then $GREP    "$PATTERN" $LIST
+elif [ "$PATTERN" != '' ] && [ "$FILTER" != '' ] ; then $GREP    "$PATTERN" $LIST | grep -av $OPTIONS "$FILTER"
+elif [ "$PATTERN"  = '' ] && [ "$FILTER" != '' ] ; then $GREP -v "$FILTER"  $LIST
 fi

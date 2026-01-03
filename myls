@@ -1,5 +1,5 @@
 #!/bin/bash
-
+ 
 # myls -h : afficher l'aide
 
 detail()
