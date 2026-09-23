@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# mygrep version 1.00 Janvier 2025 par Thierry Le Gall
+# mygrep version 1.10 Septembre 2026 par Thierry Le Gall
 # rechercher dans une liste de répertoires et de fichiers
 # syntaxe : mygrep "OPTIONS" "PATTERN" "FILTER" "LIST"
 
@@ -11,7 +11,7 @@ LIST=$4
 
 [ "$LIST" = '' ] && exit
 
-GREP="grep -aR --exclude=*.swp $OPTIONS"
+GREP="grep -aR --exclude=*.swp $OPTIONS --"
 
 if   [ "$PATTERN" != '' ] && [ "$FILTER"  = '' ] ; then $GREP    "$PATTERN" $LIST
 elif [ "$PATTERN" != '' ] && [ "$FILTER" != '' ] ; then $GREP    "$PATTERN" $LIST | grep -av $OPTIONS "$FILTER"
